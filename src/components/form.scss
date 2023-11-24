@@ -1,0 +1,80 @@
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
+
+
+// section#form{
+//     all:initial;
+//     background: rgb(81, 79, 79);
+//     display: block;
+//     width: 100%;
+//     min-height: 100vh;
+//     // margin-top: 0rem;
+
+// }
+
+/* Form styling goes here */
+
+/* Form styling goes here */
+
+span::after {
+    content: '*';
+    color: red; /* Customize the color */
+  }
+  
+  /* Style the input field if it's invalid */
+  input:invalid {
+    border: 1px solid red; /* Customize the border color for invalid input */
+  }
+
+form {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  
+    h2 {
+      font-size: 1.5em;
+      margin-top: 20px;
+    }
+  
+    label {
+      display: block;
+      margin-top: 10px;
+    }
+  
+    input[type="text"],
+    input[type="email"],
+    input[type="file"],
+    input[type="number"],
+    textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+  
+    input[type="text"]:hover,
+    input[type="email"]:hover,
+    input[type="file"]:hover,
+    textarea:hover {
+      border: 1px solid #555;
+    }
+  
+    button {
+      margin-top: 20px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      padding: 10px 20px;
+      cursor: pointer;
+      font-weight: bold;
+  
+      &:hover {
+        background-color: #0056b3;
+      }
+    }
+  
+    /* Add more specific styles for other form elements as needed */
+  }
+  
