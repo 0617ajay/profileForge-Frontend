@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, useParams, useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useParams, useNavigate, Navigate } from 'react-router-dom';
 import Header from './components/Header.jsx';
 import Nav from './components/Nav.jsx';
 import About from './components/About.jsx';
@@ -14,11 +14,11 @@ import SocialComponent from './components/form/SocialComponent.jsx';
 import ProjectComponent from './components/form/ProjectComponent.jsx';
 import ExperienceComponent from './components/form/ExperienceComponet.jsx';
 import EducationComponent from './components/form/EducationComponent.jsx';
-import AchievementComponent from './components/form/AchievementComponent.jsx';
-import SkillsComponent from './components/form/SkillComponent.jsx';
+// import ResumeComponent from './components/form/ResumeComponent.jsx';
 import axios from 'axios';
 import './style.scss';
 import './index.scss';
+import Education from './components/Education.jsx';
 
 const PortfolioDetails = () => {
   const [apidata , setApidata] = useState(null);
@@ -87,39 +87,19 @@ const PortfolioDetails = () => {
     <>
 
       {/* <p>{apidata.firstName}</p> */}
-      <Header personalDetails = {personalDetails} 
-      />
+      <Header personalDetails = {personalDetails} socialHandle={socialHandle}/>
       <Nav />
-      <About />
-      <Experience  />
-      <Portfolio  />
-      <Contact info = {personalDetails}/>
-      <Footer />
+      <About personalDetails = {personalDetails}/>
+      <Education education = {education}/>
+      <Experience experience={experience} />
+      <Portfolio project={project} />
+      <Contact info = {personalDetails} socialHandle={socialHandle}/>
+      <Footer socialHandle={socialHandle}/>
     </>
   );
 };
 
 const App = () => {
-  // const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   // Navigate to the default route when the component mounts
-  //   navigate('/portfolio/demo');
-  // }, [navigate]);
-  
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await axios.get(`https://profileforge.azurewebsites.net/user/username/${id}`);
-  //       const data = response.data;
-  //       console.log('Data from API:', data);
-  //     } catch (error) {
-  //       console.error('Error fetching data:', error);
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, []);
   return (
     <Router>
       <Routes>
@@ -130,9 +110,7 @@ const App = () => {
         <Route path="/portfolio_project-component" element={<ProjectComponent />} />
         <Route path="/portfolio_experience-component" element={<ExperienceComponent />} />
         <Route path="/portfolio_education-component" element={<EducationComponent />} />
-        <Route path="/portfolio_achievement-component" element={<AchievementComponent />} />
-        <Route path="/portfolio_skill-component" element={<SkillsComponent />} />
-        <Route path="/:id" element={<PortfolioDetails />} />
+        <Route path="/:id" element={<PortfolioDetails />}/>
       </Routes>
     </Router>
   );

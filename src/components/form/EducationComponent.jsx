@@ -1,11 +1,8 @@
-// Import necessary dependencies
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-// Create the EducationComponent functional component
 const EducationComponent = () => {
-  // Initialize the necessary state variables
   const navigate = useNavigate();
   const [education, setEducation] = useState({
     instituteName: '',
@@ -18,7 +15,6 @@ const EducationComponent = () => {
     gpa: 0,
   });
 
-  // Handle changes in the input fields
   const handleChange = (e) => {
     const { name, value } = e.target;
     setEducation({
@@ -27,10 +23,8 @@ const EducationComponent = () => {
     });
   };
 
-  // Handle the form submission
   const handleNextPage = async () => {
     await handleSubmit('next');
-    // Reset the input values to empty
     setEducation({
       instituteName: '',
       startDate: '',
@@ -44,15 +38,12 @@ const EducationComponent = () => {
   };
 
   const handleSubmit = async (navigateTo) => {
-    // Assuming you have the userId and authToken available
     const userId = localStorage.getItem('userId');
     const mytoken = localStorage.getItem('accessToken');
     console.log( `token to access is : Bearer ${mytoken}`)
-    // Your API endpoint for education
     const apiUrl = `https://profileforge.azurewebsites.net/education/user/${userId}`;
 
     try {
-      // Sending education data to the API
       const response = await axios.post(apiUrl, education, {
         headers: {
           Authorization: `Bearer ${mytoken}`,
@@ -62,20 +53,15 @@ const EducationComponent = () => {
 
       console.log('Education data submission successful:', response);
       if (navigateTo === 'home') {
-        navigate('/portfolio_achievement-component');
+        navigate('/sunny12345');
       } else {
-        // If navigateTo is not 'home', it means 'next', navigate back to the same page
-        // You may want to update the path accordingly
-        navigate('/portfolio_education-component'); // Update this path as needed
+        navigate('/portfolio_education-component'); 
       }
-      // You can perform any necessary actions after the form is submitted successfully
     } catch (error) {
       console.error('Error submitting Education data:', error);
-      // Handle error scenarios
     }
   };
 
-  // Render the form for education details
   return (
     <form onSubmit={(e) => e.preventDefault()}>
       <div>
@@ -171,5 +157,4 @@ const EducationComponent = () => {
   );
 };
 
-// Export the EducationComponent for use in other components or files
 export default EducationComponent;

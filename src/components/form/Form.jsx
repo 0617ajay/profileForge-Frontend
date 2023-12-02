@@ -123,7 +123,6 @@ function PortfolioForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Assuming you have the userId and authToken available
     const userId = localStorage.getItem('userId');
     const mytoken = localStorage.getItem("accessToken");
       // console.log();
@@ -132,7 +131,6 @@ function PortfolioForm() {
 
     console.log("Bearer" + " " + mytoken);
   
-    // Your API endpoint
     const apiUrl = `https://profileforge.azurewebsites.net/user/${userId}`;
 
     try {
@@ -151,10 +149,8 @@ function PortfolioForm() {
       localStorage.setItem('username', userUrl);
       navigate('/portfolio_social-component');
 
-      // You can perform any necessary actions after the form is submitted successfully
     } catch (error) {
       console.error('Error submitting Social Handles:', error);
-      // Handle error scenarios
     }
   };
 
@@ -212,16 +208,16 @@ function PortfolioForm() {
           />
         </label>
         <label>
-          Profile Image
+          Profile Image 1
           <input
-            type="file"
+            type="text"
             name="profileImage"
             value={formData.profileImage}
             onChange={handlePersonalChange}
           />
         </label>
         <label>
-          Profile Image URL
+          Profile Image 2
           <input
             type="text"
             name="profileImageUrl"
@@ -232,7 +228,7 @@ function PortfolioForm() {
         <label>
           Result File URL
           <input
-            type="file"
+            type="text"
             name="resuleFileUrl"
             value={formData.resuleFileUrl}
             onChange={handlePersonalChange}

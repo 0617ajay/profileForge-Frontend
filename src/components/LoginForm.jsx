@@ -3,11 +3,13 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
+// import Loader from './Loader';
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
+  // const[loading,setLoading] = useState(true);
 
   const handleLogin = async () => {
     try {
@@ -25,27 +27,26 @@ const LoginForm = () => {
         }
       );
 
-      // Assuming the server returns a token upon successful login
       const { jwtToken, user } = response.data;
 
 
-      // Store the token securely (e.g., in localStorage or as an HttpOnly cookie)
       localStorage.setItem('accessToken', jwtToken);
       localStorage.setItem('userId', user.userId);
       
       const mytoken = localStorage.getItem("accessToken");
       console.log(mytoken, user);
+      // setLoading(false);
 
-      // Redirect to the home page or another authorized area
       navigate('/portfolio_form');
     } catch (error) {
-      // Handle errors (network issues, server errors, etc.)
       window.alert('Error during login:', error);
     }
   };
 
   return (
     <div>
+      {/* {loading?<Loader/>:
+         ( <> */}
       <h2>Login Page</h2>
       <form onSubmit={(e) => {
         e.preventDefault();
@@ -60,6 +61,8 @@ const LoginForm = () => {
         <button type="submit">Login</button>
       </form>
         <Link to="/portfolio_signup">Don't have an account? Signup here</Link>
+      {/* </>
+         )} */}
     </div>
   );
 };

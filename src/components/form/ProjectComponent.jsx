@@ -28,7 +28,6 @@ const handleChange = (e) => {
 
   const handleNextPage = async () => {
     await handleSubmit('next');
-    // Reset the input values to empty
     setProjects({
       projectName: '',
       description: '',
@@ -45,17 +44,14 @@ const handleChange = (e) => {
 
   const handleSubmit = async (navigateTo) => {
 
-    // Assuming you have the userId and authToken available
     const userId = localStorage.getItem('userId');
     const mytoken = localStorage.getItem('accessToken');
 
-    // Your API endpoint
     const apiUrl = `https://profileforge.azurewebsites.net/project/user/${userId}`;
     console.log(projects);
     console.log(mytoken);
     console.log(userId);
     try {
-      // Sending all projects to the API
       const response = await axios.post(apiUrl, projects, {
         headers: {
           Authorization: `Bearer ${mytoken}`,
@@ -67,14 +63,10 @@ const handleChange = (e) => {
       if (navigateTo === 'home') {
         navigate('/portfolio_experience-component');
       } else {
-        // If navigateTo is not 'home', it means 'next', navigate back to the same page
-        // You may want to update the path accordingly
-        navigate('/portfolio_project-component'); // Update this path as needed
+        navigate('/portfolio_project-component'); 
       }
-      // You can perform any necessary actions after the form is submitted successfully
     } catch (error) {
       console.error('Error submitting Project data:', error);
-      // Handle error scenarios
     }
   };
 

@@ -3,10 +3,12 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-
+// import Loader from "./Loader";
 const SignupPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+      // const[loading,setLoading] = useState(false);
+
   const navigate = useNavigate();
 
   // const handleSignup =() => {
@@ -30,11 +32,10 @@ const SignupPage = () => {
       );
 
       console.log(data);
+      // setLoading(false);
       navigate("/portfolio_login");
-      // // Access the response data
       // const responseData = response.data;
 
-      // // Use responseData as needed
       // window.alert('Server response:', responseData);
 
       // // Check response status and handle accordingly
@@ -46,25 +47,19 @@ const SignupPage = () => {
       //   window.alert('Unexpected response status:', response.status);
       // }
     } catch (error) {
-      // Log the detailed error information
       console.error("Error during signup:", error.request);
 
-      // Access additional error properties
       if (error.response) {
-        // The request was made and the server responded with a status code
-        // that falls out of the range of 2xx
         console.log(
           "Server responded with status code:",
           error.response.status
         );
         console.log("Response data:", error.response.data);
       } else if (error.request) {
-        // The request was made but no response was received
         console.log(
           "No response received. The request was made but no response was received."
         );
       } else {
-        // Something happened in setting up the request that triggered an Error
         console.log("Error setting up the request:", error.message);
       }
     }
@@ -93,7 +88,10 @@ const SignupPage = () => {
   // };
 
   return (
+   
     <div>
+    {/* {loading ? <Loader/>:
+         (<> */}
       <h2>Signup Page</h2>
       <form
         onSubmit={(e) => {
@@ -120,7 +118,11 @@ const SignupPage = () => {
         <button type="submit">Signup</button>
       </form>
       <Link to="/portfolio_login">Already Signed Up?</Link>
+    {/* </>
+     )} */}
     </div>
+
+   
   );
 };
 

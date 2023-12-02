@@ -2,7 +2,7 @@ import React from "react";
 import { CiLinkedin } from "react-icons/ci";
 import { FaGithub,FaXTwitter } from "react-icons/fa6";
 import { AiOutlineInstagram } from "react-icons/ai";
-const Footer = () => {
+const Footer = ({socialHandle}) => {
   return (
     <footer>
       <a href="#" className="footer_logo">
@@ -15,6 +15,10 @@ const Footer = () => {
         <li>
           <a href="#about">About</a>
         </li>
+        
+        <li>
+          <a href="#education">Education</a>
+        </li>
         <li>
           <a href="#experience">Experience</a>
         </li>
@@ -25,21 +29,30 @@ const Footer = () => {
           <a href="#contact">Contact</a>
         </li>
       </ul>
+
+      {(socialHandle) ? (
+          
       <div className="footer_socials">
-        <a href="https://instagram.com">
+        <a href={socialHandle.instagram} target="blank">
+          
           <AiOutlineInstagram />
         </a>
-        <a href="https://linkedin.com">
+        <a href={socialHandle.linkedin}  target="blank">
           <CiLinkedin />
         </a>
-        <a href="https://github.com">
+        {/* <a href="https://github.com">
           <FaGithub />
-        </a>
-        <a href="https://twitter.com">
+        </a> */}
+        <a href={socialHandle.x}  target="blank">
           < FaXTwitter />
         </a>
       </div>
-       <div className="footer_copyright">
+      
+
+) : (
+  <p>Loading...</p>
+)}
+ <div className="footer_copyright">
         <small>&copy;copyright : All rights reserved </small>
        </div>
     </footer>

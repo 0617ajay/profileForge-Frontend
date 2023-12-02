@@ -4,37 +4,38 @@ import ME from '../assests/me.png';
 import { BsLinkedin, BsGithub } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 
-const HeaderSocials = () => {
+const HeaderSocials = ({socialHandle}) => {
   return (
     <div className="header_socials">
-      <a href="https://linkedin.com" target="blank">
+      <a href={`${socialHandle.linkedin}`} target="blank"><BsLinkedin /></a>
+      {/* <a href={`${socialHandle.linkedin}`} target="blank">
         <BsLinkedin />
-      </a>
-      <a href="https://github.com" target="blank">
+      </a> */}
+      {/* <a href="https://github.com" target="blank">
         <BsGithub />
-      </a>
+      </a> */}
     </div>
   );
 };
 
-const CTA = () => {
+const CTA = ({personalDetails}) => {
   return (
     <div className="cta">
       <a href={CV} download className="btn">
         Download CV
       </a>
-      <a href="#contact" className="btn btn-primary">
+      <a href="#contact" className="btn btn-primary maker">
         Let's Talk
       </a>
     </div>
   );
 };
 
-const Header = ({ personalDetails }) => {
+const Header = ({ personalDetails ,socialHandle}) => {
   return (
     <header>
       <br></br>
-      <Link to="/portfolio_signup">Make it yours</Link>
+      <Link to="/portfolio_signup" className='btn btn-primary'>Make it yours</Link>
       <div className="container header_container">
         <h5>Hello I'm</h5>
         {personalDetails ? (
@@ -42,10 +43,10 @@ const Header = ({ personalDetails }) => {
             <h1>{personalDetails.firstName} {personalDetails.lastName}</h1>
             {/* <h5 className="text-light">FullStack Developer</h5> */}
             <h5 className="text-light">{personalDetails.bio}</h5>
-            <CTA />
-            <HeaderSocials />
+            <CTA personalDetails={personalDetails}/>
+            <HeaderSocials socialHandle={socialHandle}/>
             <div className="me">
-              <img src={ME} alt="me" />
+              <img src={ME} alt={personalDetails.profileImageUrl}  />
             </div>
             <a href="#contact" className="scroll_down">
               Scroll Down

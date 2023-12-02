@@ -28,11 +28,9 @@ const SocialComponent = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Assuming you have the userId and authToken available
     const userId = localStorage.getItem('userId');
     const mytoken = localStorage.getItem("accessToken");
       // console.log(socialHandle);
-    // Your API endpoint
     const apiUrl = `https://profileforge.azurewebsites.net/social/user/${userId}`;
 
     try {
@@ -45,10 +43,8 @@ const SocialComponent = () => {
 
       console.log('Social Handles submission successful:', response);
       navigate('/portfolio_project-component');
-      // You can perform any necessary actions after the form is submitted successfully
     } catch (error) {
       console.error('Error submitting Social Handles:', error);
-      // Handle error scenarios
     }
   };
   return (
@@ -72,6 +68,24 @@ const SocialComponent = () => {
               type="text"
               name="linkedin"
               value={socialHandle.linkedin}
+              onChange={handleChange}
+            />
+          </label>
+          <label>
+            Twitter
+            <input
+              type="text"
+              name="x"
+              value={socialHandle.x}
+              onChange={handleChange}
+            />
+          </label>
+          <label>
+            Instagram
+            <input
+              type="text"
+              name="instagram"
+              value={socialHandle.instagram}
               onChange={handleChange}
             />
           </label>

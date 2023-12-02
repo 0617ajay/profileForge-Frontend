@@ -48,7 +48,6 @@ const ExperienceComponent = () => {
     const apiUrl = `https://profileforge.azurewebsites.net/experience/user/${userId}`;
 
     try {
-      // Sending experience data to the API
       const response = await axios.post(apiUrl, experience, {
         headers: {
           Authorization: `Bearer ${mytoken}`,
@@ -58,20 +57,15 @@ const ExperienceComponent = () => {
 
       console.log('Experience data submission successful:', response);
       if (navigateTo === 'home') {
-        navigate('/portfolio_achievement-component');
+        navigate('/portfolio_education-component');
       } else {
-        // If navigateTo is not 'home', it means 'next', navigate back to the same page
-        // You may want to update the path accordingly
-        navigate('/portfolio_experience-component'); // Update this path as needed
+        navigate('/portfolio_experience-component'); 
       }
-      // You can perform any necessary actions after the form is submitted successfully
     } catch (error) {
       console.error('Error submitting Experience data:', error);
-      // Handle error scenarios
     }
   };
 
-  // Render the form for experience details
   return (
     <form onSubmit={(e) => e.preventDefault()}>
       <div>
@@ -146,5 +140,4 @@ const ExperienceComponent = () => {
   );
 };
 
-// Export the ExperienceComponent for use in other components or files
 export default ExperienceComponent;

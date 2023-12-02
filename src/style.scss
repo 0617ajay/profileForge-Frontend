@@ -2,6 +2,11 @@
 // +++++++++++++++++++ HEADER ++++++++++++++++++++++
 
 header {
+
+  // .marker {
+  //   margin:auto;
+  //   text-align: center;
+  // }
   height: 100vh;
   padding-top: 2rem;
   overflow: hidden;
@@ -181,10 +186,20 @@ nav {
   }
 
   .about_content {
-    p {
-      margin: 2rem 0 2.6rem;
-      color: $color-light;
+    padding-top: 5px ;
+
+    ul {
+      margin: 20px 0px 20px 0px;
     }
+    li {
+      font-size: large;
+      line-height: 300%;
+    }
+
+    // p {
+    //   margin: 4rem 0 2.6rem;
+    //   color: $color-light;
+    // }
   }
 
   @media screen and (max-width: 880px) {
@@ -221,15 +236,18 @@ nav {
 }
 
 // ++++++++++++++++++++++++++++ Experience +++++++++++++++++
-#experience {
+#experience,#education{
   // display: none;
   .experience_container {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+
+    // grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
     > div h3 {
-      text-align: center;
-      margin-bottom: 2rem;
+      // text-align: center;
+      margin-bottom: 1rem;
       color: $color-primary;
     }
     > div {
@@ -245,6 +263,10 @@ nav {
     }
 
     .experience_content {
+      h4{
+        
+        color: red;
+      }
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       row-gap: 2rem;
@@ -287,7 +309,7 @@ nav {
 #portfolio {
   .portfoilo_container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 2.5rem;
 
     > .portfolio_item {
@@ -307,7 +329,7 @@ nav {
       }
 
       h3 {
-        margin: 1.2rem 0 2rem;
+        margin: 1.2rem 0 0.5rem;
       }
       .portfolio_item-cta {
         display: flex;
