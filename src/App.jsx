@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, useParams, useNavigate, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useParams, useNavigate } from 'react-router-dom';
 import Header from './components/Header.jsx';
 import Nav from './components/Nav.jsx';
 import About from './components/About.jsx';
@@ -19,9 +19,12 @@ import axios from 'axios';
 import './style.scss';
 import './index.scss';
 import Education from './components/Education.jsx';
+import Loader from './components/Loader.jsx';
 
 const PortfolioDetails = () => {
   const [apidata , setApidata] = useState(null);
+  const[loading,setLoading] = useState(true);
+
   // const [myObject , setMyObject] = useState(null);
   const { id } = useParams();
   const navigate = useNavigate();
@@ -65,8 +68,12 @@ const PortfolioDetails = () => {
         const {status} =error.request;
       }
     };
-
+    // console.log(window.location.pathname);
+    if (window.location.pathname === '/') {
+      navigate('/portfolio/demo');
+    }
     fetchData();
+
   }, [id,navigate]);
 
   useEffect(() => {
@@ -76,18 +83,27 @@ const PortfolioDetails = () => {
     console.log("education is now:", education);
     console.log("personalDetails is now:", personalDetails);
     console.log("project is now:", project);
-  }, [apidata, socialHandle, education, personalDetails , project ,achievement ,experience]);
+    if(personalDetails != null) {
+      setLoading(false);
+    }
+  }, [apidata,loading, socialHandle, education, personalDetails , project ,achievement ,experience]);
+
 
   // if (!apidata) {
   //   return null; // or loading indicator
   // }
 
   return (
-    
+
     <>
+      {loading ? (
+        <Loader/>
+  
+    ) : (
+      <>
 
       {/* <p>{apidata.firstName}</p> */}
-      <Header personalDetails = {personalDetails} socialHandle={socialHandle}/>
+      <Header personalDetails = {personalDetails} socialHandle={socialHandle} id={id}/>
       <Nav />
       <About personalDetails = {personalDetails}/>
       <Education education = {education}/>
@@ -96,13 +112,26 @@ const PortfolioDetails = () => {
       <Contact info = {personalDetails} socialHandle={socialHandle}/>
       <Footer socialHandle={socialHandle}/>
     </>
+    )}
+
+    </>
   );
 };
 
 const App = () => {
+  
+  
   return (
     <Router>
+      <PortfolioDetails />
       <Routes>
+      
+      
+      <Route
+          path="/portfolio/:id"
+          element={<PortfolioDetails />}
+        />
+
         <Route path="/portfolio_form" element={<Form />} />
         <Route path="/portfolio_signup" element={<SignupForm />} />
         <Route path="/portfolio_login" element={<LoginForm />} />
@@ -110,7 +139,6 @@ const App = () => {
         <Route path="/portfolio_project-component" element={<ProjectComponent />} />
         <Route path="/portfolio_experience-component" element={<ExperienceComponent />} />
         <Route path="/portfolio_education-component" element={<EducationComponent />} />
-        <Route path="/:id" element={<PortfolioDetails />}/>
       </Routes>
     </Router>
   );

@@ -53,7 +53,7 @@ const EducationComponent = () => {
 
       console.log('Education data submission successful:', response);
       if (navigateTo === 'home') {
-        navigate('/sunny12345');
+        navigate('/portfolio/demo');
       } else {
         navigate('/portfolio_education-component'); 
       }

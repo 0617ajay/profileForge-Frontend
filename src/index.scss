@@ -29,6 +29,17 @@ body {
 //   background-image: url("../src/assests/bg-texture.png");
 }
 
+#loader{
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    scroll-behavior: none;
+}
+
 html {
   scroll-behavior: smooth;
 }

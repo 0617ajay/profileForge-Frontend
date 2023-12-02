@@ -2,7 +2,10 @@ import React from 'react';
 import CV from '../assests/cv.pdf';
 import ME from '../assests/me.png';
 import { BsLinkedin, BsGithub } from 'react-icons/bs';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import Loader from './Loader';
+import { useEffect } from 'react';
+import { useState } from 'react';
 
 const HeaderSocials = ({socialHandle}) => {
   return (
@@ -31,11 +34,18 @@ const CTA = ({personalDetails}) => {
   );
 };
 
-const Header = ({ personalDetails ,socialHandle}) => {
+const Header = ({ personalDetails ,socialHandle,id}) => {
+  // const { id } = useParams();
+  // const n = "ajay";
+  // console.log("param id ",id);
+  // const isDemoMode = param !== 'demo';
   return (
     <header>
+        {/* {isDemoMode && ( */}
+        <Link to="/portfolio_signup" className='btn btn-primary'>Make it yours</Link>
+      {/* )} */}
       <br></br>
-      <Link to="/portfolio_signup" className='btn btn-primary'>Make it yours</Link>
+      {/* <Link to="/portfolio_signup" className='btn btn-primary'>Make it yours</Link> */}
       <div className="container header_container">
         <h5>Hello I'm</h5>
         {personalDetails ? (
