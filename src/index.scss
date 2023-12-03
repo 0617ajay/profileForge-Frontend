@@ -40,6 +40,26 @@ body {
     scroll-behavior: none;
 }
 
+
+.not-found-container {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 20px;
+    h3 {
+        color: #ff0000; 
+      }
+      @media (max-width: 600px) {
+        .not-found-container {
+          padding: 10px;
+        }
+      }
+  }
+  
+  
+  
+  
+
 html {
   scroll-behavior: smooth;
 }

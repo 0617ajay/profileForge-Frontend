@@ -26,6 +26,7 @@ import "./style.scss";
 import "./index.scss";
 import Education from "./components/Education.jsx";
 import Loader from "./components/Loader.jsx";
+import NotFound from "./components/NotFound.jsx";
 
 const PortfolioDetails = () => {
   const [apidata, setApidata] = useState(null);
@@ -177,6 +178,8 @@ const App = () => {
           path="/portfolio_education-component"
           element={<EducationComponent />}
         />
+        <Route path="*" element={<NotFound/>} />
+
       </Routes>
     </Router>
   );
