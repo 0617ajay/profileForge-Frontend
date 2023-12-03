@@ -2,7 +2,7 @@ import React from 'react';
 import CV from '../assests/cv.pdf';
 import ME from '../assests/me.png';
 import { BsLinkedin, BsGithub } from 'react-icons/bs';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import Loader from './Loader';
 import { useEffect } from 'react';
 import { useState } from 'react';
@@ -35,21 +35,23 @@ const CTA = ({personalDetails}) => {
 };
 
 const Header = ({ personalDetails ,socialHandle,id}) => {
+  const location = useLocation();
+  const isDemoMode = location.pathname === '/portfolio/demo';
   // const { id } = useParams();
   // const n = "ajay";
   // console.log("param id ",id);
   // const isDemoMode = param !== 'demo';
   return (
     <header>
-        {/* {isDemoMode && ( */}
-        <Link to="/portfolio_signup" className='btn btn-primary'>Make it yours</Link>
-      {/* )} */}
+        {isDemoMode && (
+        <Link to="/portfolio_signup" className='btn btn-primary' style={{display:'block', margin:'auto'}}>Make it yours</Link>
+       )} 
       <br></br>
       {/* <Link to="/portfolio_signup" className='btn btn-primary'>Make it yours</Link> */}
       <div className="container header_container">
-        <h5>Hello I'm</h5>
         {personalDetails ? (
           <>
+            <h5>Hello I'm</h5>
             <h1>{personalDetails.firstName} {personalDetails.lastName}</h1>
             {/* <h5 className="text-light">FullStack Developer</h5> */}
             <h5 className="text-light">{personalDetails.bio}</h5>
