@@ -1,9 +1,11 @@
 import axios from 'axios';
 import React, { useState } from 'react'
 import {useNavigate} from "react-router-dom";
+import Loader from '../Loader';
 
 const SocialComponent = () => {
   const navigate = useNavigate();
+  const[loading,setLoading] = useState(false);
   const [socialHandle, setSocialHandle] = useState({
     gmail: '',
     linkedin: '',
@@ -27,7 +29,7 @@ const SocialComponent = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    setLoading(true);
     const userId = localStorage.getItem('userId');
     const mytoken = localStorage.getItem("accessToken");
       // console.log(socialHandle);
@@ -41,15 +43,18 @@ const SocialComponent = () => {
         },
       });
 
-      console.log('Social Handles submission successful:', response);
+      // console.log('Social Handles submission successful:', response);
       navigate('/portfolio_project-component');
+      setLoading(false); 
     } catch (error) {
       console.error('Error submitting Social Handles:', error);
     }
   };
   return (
       <form onSubmit={handleSubmit}>
-        
+        {loading?<Loader/>:
+         ( <>
+
         {/* Social Handles */}
         <div>
           <h2>Social Handles</h2>
@@ -64,36 +69,42 @@ const SocialComponent = () => {
             />
           </label>
           <label>
-            Linkedin
+            Linkedin <span></span>
             <input
               type="text"
               name="linkedin"
               value={socialHandle.linkedin}
               onChange={handleChange}
+              required
             />
           </label>
           <label>
-            Twitter
+            Twitter <span></span>
             <input
               type="text"
               name="x"
               value={socialHandle.x}
               onChange={handleChange}
+              required
             />
           </label>
           <label>
-            Instagram
+            Instagram <span></span>
             <input
               type="text"
               name="instagram"
               value={socialHandle.instagram}
               onChange={handleChange}
+              required
             />
           </label>
         </div>
   
         <button type="submit">Next</button>
+      </>
+         )}
       </form>
+
     );
   
   

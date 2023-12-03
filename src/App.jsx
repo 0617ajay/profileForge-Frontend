@@ -151,7 +151,7 @@ const PortfolioDetails = () => {
 const App = () => {
   if (window.location.pathname === "/") {
     // navigate('/portfolio/demo');
-    window.location.pathname = "/portfolio/demo";
+    window.location.pathname = "/portfolio/template";
   }
 
   return (

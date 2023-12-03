@@ -36,7 +36,7 @@ const CTA = ({personalDetails}) => {
 
 const Header = ({ personalDetails ,socialHandle,id}) => {
   const location = useLocation();
-  const isDemoMode = location.pathname === '/portfolio/demo';
+  const isDemoMode = location.pathname === '/portfolio/template';
   // const { id } = useParams();
   // const n = "ajay";
   // console.log("param id ",id);

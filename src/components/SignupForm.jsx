@@ -11,7 +11,9 @@ const SignupPage = () => {
   const [password, setPassword] = useState("");
   const[loading,setLoading] = useState(false);
   const [error,setError] =useState(false);
+  const [isPasswordFocused, setIsPasswordFocused] = useState(false);
 
+  const isPasswordValid = password.length >= 6;
   const navigate = useNavigate();
 
   // const handleSignup =() => {
@@ -125,13 +127,21 @@ const SignupPage = () => {
 
         <label>Password:</label>
         <input
-          type="text"
+          type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          onFocus={() => setIsPasswordFocused(true)}
+          onBlur={() => setIsPasswordFocused(false)}
           required
         />
+          {isPasswordFocused && !isPasswordValid && (
+              <p style={{ color: 'red', fontSize: '0.8em' }}>
+                Password must be at least 6 characters long.
+              </p>
+            )}
 
-        <button type="submit">Signup</button>
+            
+        <button type="submit" disabled={!isPasswordValid}>Signup</button>
       </form>
       <Link to="/portfolio_login">Already Signed Up?</Link>
     </>

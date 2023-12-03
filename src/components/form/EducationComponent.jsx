@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Loader from '../Loader';
 
 const EducationComponent = () => {
   const navigate = useNavigate();
+  const[loading,setLoading] = useState(false);
+
   const [education, setEducation] = useState({
     instituteName: '',
     startDate: '',
@@ -39,9 +42,11 @@ const EducationComponent = () => {
 
   const handleSubmit = async (navigateTo) => {
     const userId = localStorage.getItem('userId');
+    const username = localStorage.getItem('username')
     const mytoken = localStorage.getItem('accessToken');
-    console.log( `token to access is : Bearer ${mytoken}`)
+    // console.log( `token to access is : Bearer ${mytoken}`)
     const apiUrl = `https://profileforge.azurewebsites.net/education/user/${userId}`;
+    setLoading(true);
 
     try {
       const response = await axios.post(apiUrl, education, {
@@ -51,23 +56,31 @@ const EducationComponent = () => {
         },
       });
 
-      console.log('Education data submission successful:', response);
+      // console.log('Education data submission successful:', response);
       if (navigateTo === 'home') {
-        navigate('/portfolio/demo');
+        navigate(`/portfolio/${username}`);
       } else {
         navigate('/portfolio_education-component'); 
       }
     } catch (error) {
-      console.error('Error submitting Education data:', error);
+      if(error.response.status==409){
+        window.alert('Please fill the required fields to proceed to next page');
+      }
+      // console.error('Error submitting Education data:', error);
+    }finally {
+      setLoading(false);
+
     }
   };
 
   return (
     <form onSubmit={(e) => e.preventDefault()}>
+      {loading?<Loader/>:
+         ( <>
       <div>
         <h2>Education Details</h2>
         <label>
-          Institute Name*
+          Institute Name <span></span>
           <input
             type="text"
             name="instituteName"
@@ -77,7 +90,7 @@ const EducationComponent = () => {
           />
         </label>
         <label>
-          Start Date*
+          Start Date <span></span>
           <input
             type="text"
             name="startDate"
@@ -87,7 +100,7 @@ const EducationComponent = () => {
           />
         </label>
         <label>
-          End Date*
+          End Date <span></span>
           <input
             type="text"
             name="endDate"
@@ -97,7 +110,7 @@ const EducationComponent = () => {
           />
         </label>
         <label>
-          Field*
+          Field <span></span>
           <input
             type="text"
             name="field"
@@ -116,7 +129,7 @@ const EducationComponent = () => {
           />
         </label>
         <label>
-          City*
+          City <span></span>
           <input
             type="text"
             name="city"
@@ -126,7 +139,7 @@ const EducationComponent = () => {
           />
         </label>
         <label>
-          Degree*
+          Degree <span></span>
           <input
             type="text"
             name="degree"
@@ -136,23 +149,24 @@ const EducationComponent = () => {
           />
         </label>
         <label>
-          GPA
+          GPA <span></span>
           <input
             type="number"
             name="gpa"
             value={education.gpa}
             onChange={handleChange}
-            
+            required
           />
         </label>
       </div>
 
-      <button type="button" onClick={handleNextPage}>
+      <button type="submit" onClick={handleNextPage}>
         Next Education
       </button>
-      <button type="button" onClick={() => handleSubmit('home')}>
+      <button type="submit" onClick={() => handleSubmit('home')}>
         Submit
       </button>
+      </> )}
     </form>
   );
 };

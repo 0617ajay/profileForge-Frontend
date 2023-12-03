@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios";
+import Loader from "../Loader";
 
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "../form.scss";
-
 
 function PortfolioForm() {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     userId: "",
     email: "",
@@ -119,101 +120,107 @@ function PortfolioForm() {
     }));
   };
 
-  
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const userId = localStorage.getItem('userId');
+    setLoading(true);
+    const userId = localStorage.getItem("userId");
     const mytoken = localStorage.getItem("accessToken");
-      // console.log();
-      console.log(userId);
+    // console.log();
+    // console.log(userId);
 
+    // console.log("Bearer" + " " + mytoken);
 
-    console.log("Bearer" + " " + mytoken);
-  
     const apiUrl = `https://profileforge.azurewebsites.net/user/${userId}`;
 
     try {
-      const response = await axios.put(apiUrl,formData
+      const response = await axios.put(
+        apiUrl,
+        formData,
 
-      , {
-        headers: {
-          'Authorization': "Bearer" + " " + mytoken,
-          'Content-Type': 'application/json',
-        },
-      });
+        {
+          headers: {
+            Authorization: "Bearer" + " " + mytoken,
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       const { userUrl } = response.data;
 
-      console.log('Form submission successful:', response);
-      localStorage.setItem('username', userUrl);
-      navigate('/portfolio_social-component');
-
+      // console.log("Form submission successful:", response);
+      localStorage.setItem("username", userUrl);
+      navigate("/portfolio_social-component");
+      setLoading(false);
     } catch (error) {
-      console.error('Error submitting Social Handles:', error);
+      console.error("Error submitting Social Handles:", error);
     }
   };
 
   return (
-    <form 
-    onSubmit={handleSubmit}
-    >
-      {/* Personal Details */}
-       <div>
-        <h2>Personal Details</h2>
-        <label>
-          Username <span></span>
-          <input
-            type="text"
-            name="userUrl"
-            value={formData.userUrl}
-            onChange={handlePersonalChange}
-            required
-          />
-        </label>
-        <label>
-          First Name <span></span>
-          <input
-            type="text"
-            name="firstName"
-            value={formData.firstName}
-            onChange={handlePersonalChange}
-            required
-          />
-        </label>
-        <label>
-          Last Name
-          <input
-            type="text"
-            name="lastName"
-            value={formData.lastName}
-            onChange={handlePersonalChange}
-          />
-        </label>
-        <label>
-          Bio
-          <textarea
-            name="bio"
-            value={formData.bio}
-            onChange={handlePersonalChange}
-          />
-        </label>
-        <label>
-          Phone Number <span></span>
-          <input
-            type="text"
-            name="phoneNo"
-            value={formData.phoneNo}
-            onChange={handlePersonalChange}
-            required
-          />
-        </label>
-      </div> 
-      {/* Link to the SocialComponent */}
-      {/* <Link to="/social-component">Go to Social Component</Link>
+    <form onSubmit={handleSubmit}>
+      {loading ? (
+        <Loader />
+      ) : (
+        <>
+          {/* Personal Details */}
+
+          <div>
+            <h2>Personal Details</h2>
+            <label>
+              Username <span></span>
+              <input
+                type="text"
+                name="userUrl"
+                value={formData.userUrl}
+                onChange={handlePersonalChange}
+                required
+              />
+            </label>
+            <label>
+              First Name <span></span>
+              <input
+                type="text"
+                name="firstName"
+                value={formData.firstName}
+                onChange={handlePersonalChange}
+                required
+              />
+            </label>
+            <label>
+              Last Name
+              <input
+                type="text"
+                name="lastName"
+                value={formData.lastName}
+                onChange={handlePersonalChange}
+              />
+            </label>
+            <label>
+              Bio
+              <textarea
+                name="bio"
+                value={formData.bio}
+                onChange={handlePersonalChange}
+              />
+            </label>
+            <label>
+              Phone Number <span></span>
+              <input
+                type="text"
+                name="phoneNo"
+                value={formData.phoneNo}
+                onChange={handlePersonalChange}
+                required
+              />
+            </label>
+          </div>
+          {/* Link to the SocialComponent */}
+          {/* <Link to="/social-component">Go to Social Component</Link>
       <SocialComponent/> */}
 
-      <button type="submit">Next </button>
+          <button type="submit">Next </button>
+        </>
+      )}
     </form>
   );
 }

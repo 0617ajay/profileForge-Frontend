@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Loader from '../Loader';
 
 
 const ProjectComponent = () => {
   const navigate = useNavigate();
+  const[loading,setLoading] = useState(false);
+
   const [projects, setProjects] = useState({
       projectName: '',
       description: '',
@@ -27,6 +30,7 @@ const handleChange = (e) => {
   };
 
   const handleNextPage = async () => {
+
     await handleSubmit('next');
     setProjects({
       projectName: '',
@@ -48,9 +52,11 @@ const handleChange = (e) => {
     const mytoken = localStorage.getItem('accessToken');
 
     const apiUrl = `https://profileforge.azurewebsites.net/project/user/${userId}`;
-    console.log(projects);
-    console.log(mytoken);
-    console.log(userId);
+    // console.log(projects);
+    // console.log(mytoken);
+    // console.log(userId);
+    setLoading(true);
+
     try {
       const response = await axios.post(apiUrl, projects, {
         headers: {
@@ -59,19 +65,27 @@ const handleChange = (e) => {
         },
       });
 
-      console.log('Project data submission successful:', response);
+      // console.log('Project data submission successful:', response);
       if (navigateTo === 'home') {
         navigate('/portfolio_experience-component');
       } else {
         navigate('/portfolio_project-component'); 
       }
     } catch (error) {
-      console.error('Error submitting Project data:', error);
+      if(error.response.status==409){
+        window.alert('Please fill the required fields to proceed to next page');
+      }
+      // console.error('Error submitting Project data:', error);
+    } finally {
+      setLoading(false);
+
     }
   };
 
   return (
     <form onSubmit={(e) => e.preventDefault()}>
+      {loading?<Loader/>:
+         ( <>
 
       <div>
           <h2>Project Details</h2>
@@ -139,6 +153,8 @@ const handleChange = (e) => {
         Next Page
       </button>
       </div>
+
+      </> )}
         
     </form>
   );

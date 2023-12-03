@@ -2,11 +2,13 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Loader from '../Loader';
 
 // Create the ExperienceComponent functional component
 const ExperienceComponent = () => {
   // Initialize the necessary state variables
   const navigate = useNavigate();
+  const[loading,setLoading] = useState(false);
   const [experience, setExperience] = useState({
     organizationName: '',
     position: '',
@@ -40,6 +42,8 @@ const ExperienceComponent = () => {
   };
 
   const handleSubmit = async (navigateTo) => {
+    setLoading(true);
+
     // Assuming you have the userId and authToken available
     const userId = localStorage.getItem('userId');
     const mytoken = localStorage.getItem('accessToken');
@@ -55,19 +59,27 @@ const ExperienceComponent = () => {
         },
       });
 
-      console.log('Experience data submission successful:', response);
+      // console.log('Experience data submission successful:', response);
       if (navigateTo === 'home') {
         navigate('/portfolio_education-component');
       } else {
         navigate('/portfolio_experience-component'); 
       }
     } catch (error) {
-      console.error('Error submitting Experience data:', error);
+      if(error.response.status==409){
+        window.alert('Please fill the required fields to proceed to next page');
+      }
+      // console.error('Error submitting Experience data:', error);
+    } finally {
+      setLoading(false);
+
     }
   };
 
   return (
     <form onSubmit={(e) => e.preventDefault()}>
+      {loading?<Loader/>:
+         ( <>
       <div>
         <h2>Experience Details</h2>
         <label>
@@ -134,8 +146,9 @@ const ExperienceComponent = () => {
         Next Experience
       </button>
       <button type="submit" onClick={() => handleSubmit('home')}>
-        Submit
+        Next Page
       </button>
+      </> )}
     </form>
   );
 };
