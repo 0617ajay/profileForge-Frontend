@@ -53,9 +53,10 @@ const LoginForm = () => {
 
 
   return (
-    <div id="login-form">
+    <>
       {loading?<Loader/>:
          ( <>
+    <div id="login-form">
       <h2>Login Page</h2>
       <form onSubmit={(e) => {
         e.preventDefault();
@@ -70,9 +71,10 @@ const LoginForm = () => {
         <button type="submit">Login</button>
       </form>
         <Link to="/portfolio_signup">Don't have an account? Signup here</Link>
-      </>
-         )}
-    </div>
+        </div>
+        </>
+           )}
+           </>
   );
 };
 
