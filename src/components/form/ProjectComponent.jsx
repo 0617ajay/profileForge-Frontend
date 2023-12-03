@@ -77,7 +77,7 @@ const handleChange = (e) => {
           <h2>Project Details</h2>
           
           <label>
-            Project Name
+            Project Name <span></span>
             <input
               type="text"
               name="projectName"
@@ -87,7 +87,7 @@ const handleChange = (e) => {
             />
           </label>
           <label>
-            Description
+            Description <span></span>
             <textarea
               name="description"
               value={projects.description}
@@ -96,7 +96,7 @@ const handleChange = (e) => {
             />
           </label>
           <label>
-            Github Link
+            Github Link <span></span>
             <textarea
               name="gitHubUrl"
               value={projects.gitHubUrl}
@@ -104,7 +104,7 @@ const handleChange = (e) => {
             />
           </label>
           <label>
-            Start Date
+            Start Date <span></span>
             <textarea
               name="startDate"
               value={projects.startDate}
@@ -113,7 +113,7 @@ const handleChange = (e) => {
             />
           </label>
           <label>
-            End Date
+            End Date <span></span>
             <textarea
               name="endDate"
               value={projects.endDate}
@@ -122,21 +122,24 @@ const handleChange = (e) => {
             />
           </label>
           <label>
-            Demo Video
+            Demo Video <span></span>
             <textarea
               name="demoVideo"
               value={projects.demoVideo}
               onChange={handleChange}
+              required
             />
           </label>
         </div>
-      
-        <button type="button" onClick={handleNextPage}>
+      <div>
+      <button type="submit" onClick={handleNextPage}>
         Next Project
       </button>
-      <button type="button" onClick={() => handleSubmit('home')}>
-        Submit
+      <button type="submit" onClick={() => handleSubmit('home')}>
+        Next Page
       </button>
+      </div>
+        
     </form>
   );
 };

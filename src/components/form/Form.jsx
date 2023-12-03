@@ -162,7 +162,7 @@ function PortfolioForm() {
        <div>
         <h2>Personal Details</h2>
         <label>
-          Username*
+          Username <span></span>
           <input
             type="text"
             name="userUrl"
@@ -172,7 +172,7 @@ function PortfolioForm() {
           />
         </label>
         <label>
-          First Name*
+          First Name <span></span>
           <input
             type="text"
             name="firstName"
@@ -199,39 +199,13 @@ function PortfolioForm() {
           />
         </label>
         <label>
-          Phone Number
+          Phone Number <span></span>
           <input
             type="text"
             name="phoneNo"
             value={formData.phoneNo}
             onChange={handlePersonalChange}
-          />
-        </label>
-        <label>
-          Profile Image 1
-          <input
-            type="text"
-            name="profileImage"
-            value={formData.profileImage}
-            onChange={handlePersonalChange}
-          />
-        </label>
-        <label>
-          Profile Image 2
-          <input
-            type="text"
-            name="profileImageUrl"
-            value={formData.profileImageUrl}
-            onChange={handlePersonalChange}
-          />
-        </label>
-        <label>
-          Result File URL
-          <input
-            type="text"
-            name="resuleFileUrl"
-            value={formData.resuleFileUrl}
-            onChange={handlePersonalChange}
+            required
           />
         </label>
       </div> 
@@ -239,7 +213,7 @@ function PortfolioForm() {
       {/* <Link to="/social-component">Go to Social Component</Link>
       <SocialComponent/> */}
 
-      <button type="submit">Submit </button>
+      <button type="submit">Next </button>
     </form>
   );
 }

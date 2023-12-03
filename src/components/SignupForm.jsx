@@ -3,11 +3,14 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import Loader from "./Loader";
+import ErrorComponent from "./ErrorComponent";
 // import Loader from "./Loader";
 const SignupPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-      // const[loading,setLoading] = useState(false);
+  const[loading,setLoading] = useState(false);
+  const [error,setError] =useState(false);
 
   const navigate = useNavigate();
 
@@ -17,6 +20,7 @@ const SignupPage = () => {
   // }
   const handleSignup = async () => {
     try {
+      setLoading(true); 
       const { data } = await axios.post(
         "https://profileforge.azurewebsites.net/user",
         {
@@ -34,6 +38,8 @@ const SignupPage = () => {
       console.log(data);
       // setLoading(false);
       navigate("/portfolio_login");
+      setLoading(false);
+
       // const responseData = response.data;
 
       // window.alert('Server response:', responseData);
@@ -47,23 +53,33 @@ const SignupPage = () => {
       //   window.alert('Unexpected response status:', response.status);
       // }
     } catch (error) {
-      console.error("Error during signup:", error.request);
+      setError(true);
+      setLoading(false); 
 
-      if (error.response) {
-        console.log(
-          "Server responded with status code:",
-          error.response.status
-        );
-        console.log("Response data:", error.response.data);
-      } else if (error.request) {
-        console.log(
-          "No response received. The request was made but no response was received."
-        );
-      } else {
-        console.log("Error setting up the request:", error.message);
-      }
-    }
+      // console.error("Error during signup:", error.request);
+
+      // if (error.response) {
+      //   console.log(
+      //     "Server responded with status code:",
+      //     error.response.status
+      //   );
+      //   console.log("Response data:", error.response.data);
+      // } else if (error.request) {
+      //   console.log(
+      //     "No response received. The request was made but no response was received."
+      //   );
+      // } else {
+      //   console.log("Error setting up the request:", error.message);
+      // }
+    } 
+    // finally {
+    //   // setLoading(false); 
+    // }
+
   };
+  if(error)
+  return(<ErrorComponent message={"Error while Signing up ,Please try with another Email !!!"}/>);
+
   // const handleSignup = async () => {
   //   try {
   //     const response = await axios.post(
@@ -89,9 +105,9 @@ const SignupPage = () => {
 
   return (
    
-    <div>
-    {/* {loading ? <Loader/>:
-         (<> */}
+    <div id="signup-form">
+    {loading ? <Loader/>:
+         (<>
       <h2>Signup Page</h2>
       <form
         onSubmit={(e) => {
@@ -118,8 +134,8 @@ const SignupPage = () => {
         <button type="submit">Signup</button>
       </form>
       <Link to="/portfolio_login">Already Signed Up?</Link>
-    {/* </>
-     )} */}
+    </>
+     )}
     </div>
 
    

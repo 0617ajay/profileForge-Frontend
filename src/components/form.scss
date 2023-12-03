@@ -2,21 +2,19 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
 
 
-
-span::after {
-    content: '*';
-    color: red; /* Customize the color */
-  }
-  
-  /* Style the input field if it's invalid */
-  input:invalid {
-    border: 1px solid red; /* Customize the border color for invalid input */
-  }
-
 form {
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
+
+    span::after {
+      content: '*';
+      color: red;
+      input:invalid {
+        border: 1px solid red;
+      } 
+    }
+     
   
     h2 {
       font-size: 1.5em;
@@ -48,7 +46,7 @@ form {
     }
   
     button {
-      margin-top: 20px;
+      margin: 20px 10px 20px 0px;
       background-color: #007bff;
       color: #fff;
       border: none;

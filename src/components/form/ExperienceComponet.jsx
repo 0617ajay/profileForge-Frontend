@@ -71,7 +71,7 @@ const ExperienceComponent = () => {
       <div>
         <h2>Experience Details</h2>
         <label>
-          Organization Name*
+          Organization Name <span></span>
           <input
             type="text"
             name="organizationName"
@@ -91,7 +91,7 @@ const ExperienceComponent = () => {
           />
         </label>
         <label>
-          Start Date*
+          Start Date <span></span>
           <input
             type="text"
             name="startDate"
@@ -101,7 +101,7 @@ const ExperienceComponent = () => {
           />
         </label>
         <label>
-          End Date*
+          End Date <span></span>
           <input
             type="text"
             name="endDate"
@@ -111,7 +111,7 @@ const ExperienceComponent = () => {
           />
         </label>
         <label>
-          Description*
+          Description <span></span>
           <textarea
             name="description"
             value={experience.description}
@@ -119,7 +119,7 @@ const ExperienceComponent = () => {
             required
           />
         </label>
-        <label>
+        {/* <label>
           Organisation Logo URL
           <input
             type="text"
@@ -127,13 +127,13 @@ const ExperienceComponent = () => {
             value={experience.organisationLogoUrl}
             onChange={handleChange}
           />
-        </label>
+        </label> */}
       </div>
 
-      <button type="button" onClick={handleNextPage}>
+      <button type="submit" onClick={handleNextPage}>
         Next Experience
       </button>
-      <button type="button" onClick={() => handleSubmit('home')}>
+      <button type="submit" onClick={() => handleSubmit('home')}>
         Submit
       </button>
     </form>

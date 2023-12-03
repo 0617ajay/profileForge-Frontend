@@ -56,7 +56,7 @@ const Header = ({ personalDetails ,socialHandle,id}) => {
             <CTA personalDetails={personalDetails}/>
             <HeaderSocials socialHandle={socialHandle}/>
             <div className="me">
-              <img src={ME} alt={personalDetails.profileImageUrl}  />
+              <img src={ME} alt="myimage"  />
             </div>
             <a href="#contact" className="scroll_down">
               Scroll Down

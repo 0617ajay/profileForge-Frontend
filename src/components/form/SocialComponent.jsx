@@ -54,12 +54,13 @@ const SocialComponent = () => {
         <div>
           <h2>Social Handles</h2>
           <label>
-            Gmail
+            Gmail <span></span>
             <input
               type="text"
               name="gmail"
               value={socialHandle.gmail}
               onChange={handleChange}
+              required
             />
           </label>
           <label>
@@ -89,10 +90,9 @@ const SocialComponent = () => {
               onChange={handleChange}
             />
           </label>
-          {/* Add other social handle inputs as needed */}
         </div>
   
-        <button type="submit">Submit</button>
+        <button type="submit">Next</button>
       </form>
     );
   

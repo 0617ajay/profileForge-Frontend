@@ -28,6 +28,11 @@ body {
 //   position: relative;
 //   background-image: url("../src/assests/bg-texture.png");
 }
+/* Loader styling */
+
+  
+  
+  
 
 #loader{
     width: 100vw;
@@ -39,6 +44,21 @@ body {
     align-items: center;
     scroll-behavior: none;
 }
+
+#errorfound {
+    width: 100vw;
+    height: 100vh;
+    background-color: #ffcccc; /* Light red background color */
+    // border: 1px solid #ff0000; /* Red border */
+    padding: 10px; /* Padding around the content */
+    margin: 10px 0; /* Margin at the top and bottom */
+    text-align: center;
+    h3 {
+        color: #ff0000; 
+      } 
+  }
+  
+  
 
 
 .not-found-container {
@@ -56,6 +76,48 @@ body {
       }
   }
   
+  /* LoginForm.css */
+
+#login-form , #signup-form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+  
+  
+  
+  h2 {
+    text-align: center;
+    color: #aaa; 
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  label {
+    margin-bottom: 8px;
+  }
+  
+  input {
+    padding: 8px;
+    margin-bottom: 16px;
+    border: 1px solid #ccc; 
+  }
+  
+  button {
+    background-color: #4caf50;
+    color: white; 
+    padding: 10px;
+    cursor: pointer;
+    border: none;
+  }
+  
+  button:hover {
+    background-color: #45a049; 
+  }
+
+}
   
   
   
