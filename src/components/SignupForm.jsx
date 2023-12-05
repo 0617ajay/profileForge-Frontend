@@ -105,11 +105,11 @@ const SignupPage = () => {
   //   }
   // };
 
-  return (
+  return (<>
    
-    <div id="signup-form">
     {loading ? <Loader/>:
-         (<>
+         (
+    <div id="signup-form">
       <h2>Signup Page</h2>
       <form
         onSubmit={(e) => {
@@ -144,10 +144,9 @@ const SignupPage = () => {
         <button type="submit" disabled={!isPasswordValid}>Signup</button>
       </form>
       <Link to="/portfolio_login">Already Signed Up?</Link>
-    </>
+      </div>
      )}
-    </div>
-
+  </>
    
   );
 };

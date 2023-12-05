@@ -82,10 +82,10 @@ const handleChange = (e) => {
     }
   };
 
-  return (
-    <form onSubmit={(e) => e.preventDefault()}>
+  return (<>
       {loading?<Loader/>:
-         ( <>
+         ( 
+    <form onSubmit={(e) => e.preventDefault()}>
 
       <div>
           <h2>Project Details</h2>
@@ -154,9 +154,9 @@ const handleChange = (e) => {
       </button>
       </div>
 
-      </> )}
-        
     </form>
+       )}
+       </> 
   );
 };
 

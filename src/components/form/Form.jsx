@@ -157,11 +157,13 @@ function PortfolioForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      {loading ? (
+    <>
+    {loading ? (
         <Loader />
       ) : (
-        <>
+    <form onSubmit={handleSubmit}>
+      
+        
           {/* Personal Details */}
 
           <div>
@@ -219,9 +221,10 @@ function PortfolioForm() {
       <SocialComponent/> */}
 
           <button type="submit">Next </button>
-        </>
-      )}
+        
     </form>
+      )}
+    </>
   );
 }
 
